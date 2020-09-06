@@ -18,6 +18,11 @@ Component({
     }
   },
   methods: {
+    openMusiclist(){
+      wx.navigateTo({
+        url: `../../pages/musiclist/musiclist?playlistId=${this.properties.playlist.id}`,
+      })
+    },
     tranNumber(num, point) {
       let numStr = num.toString().split('.')[0]
       if (numStr.length < 6) {

@@ -1,5 +1,5 @@
 <!--components/playlist/playlist.wxml-->
-<view class="playlist-container">
+<view class="playlist-container" bindtap="openMusiclist">
 	<image src="{{playlist.picUrl}}" class="playlist-img"></image>
 	<div class="playlist-number">
 		<image src="../../images/earpod.svg" class="playlist-earpod"></image>

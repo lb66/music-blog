@@ -84,7 +84,8 @@ Page({
       name: 'music',
       data: {
         start: this.data.playlist.length,
-        count: 15
+        count: 15,
+        $url:'playlist'
       }
     }).then((res) => {
       console.log(res)
