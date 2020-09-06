@@ -1,0 +1,42 @@
+.playlist-container {
+  position: relative;
+  width: 110px;
+  padding-bottom: 20rpx;
+}
+
+.playlist-img {
+  width: 100%;
+  height: 220rpx;
+  border-radius: 6rpx;
+}
+
+.playlist-number {
+  position: absolute;
+  right: 10rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 2rpx;
+}
+
+.playlist-playCount {
+  font-size: 24rpx;
+  color: #fff;
+  padding-left: 2rpx;
+}
+
+.playlist-earpod {
+  width: 24rpx;
+  height: 24rpx;
+}
+
+.playlist-name {
+  font-size: 26rpx;
+  line-height: 1.2;
+  padding: 2px 0 0 4px;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

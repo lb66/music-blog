@@ -1,0 +1,9 @@
+<!--components/playlist/playlist.wxml-->
+<view class="playlist-container">
+	<image src="{{playlist.picUrl}}" class="playlist-img"></image>
+	<div class="playlist-number">
+		<image src="../../images/earpod.svg" class="playlist-earpod"></image>
+		<text class="playlist-playCount">{{_count}}</text>
+	</div>
+	<view class="playlist-name">{{playlist.name}}</view>
+</view>
