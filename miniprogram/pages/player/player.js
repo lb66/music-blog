@@ -1,28 +1,85 @@
 // pages/player/player.js
+//获取全局唯一的背景音乐管理器
+const audioManager = wx.getBackgroundAudioManager()
+let currentIndex = 0
+let musiclist = []
+let currentMusic = {}
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    picUrl:'cc'
+    picUrl: 'cc',
+    idPlaying: false
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    const currentMusic = wx.getStorageSync('musiclist')[options.index]
+    currentIndex = options.index
+    musiclist = wx.getStorageSync('musiclist')
+    this.loadMusic()
+  },
+  loadMusic() {
+    audioManager.stop()
+    currentMusic = musiclist[currentIndex]
+    console.log(currentMusic)
     wx.setNavigationBarTitle({
       title: currentMusic.name,
     })
-    console.log(currentMusic)
     this.setData({
-      picUrl:currentMusic.al.picUrl
+      picUrl: currentMusic.al.picUrl
     })
-    console.log(this.data.picUrl)
+    wx.showLoading({
+      title: '歌曲加载中',
+    })
+    wx.cloud.callFunction({
+      name: 'music',
+      data: {
+        musicId: currentMusic.id,
+        $url: 'musicUrl'
+      }
+    }).then((res) => {
+      console.log(JSON.parse(res.result))
+      let result = JSON.parse(res.result)
+      audioManager.src = result.data[0].url
+      audioManager.title = currentMusic.name
+      audioManager.coverImgUrl = currentMusic.al.picUrl
+      audioManager.singer = currentMusic.ar[0].name
+      audioManager.epname = currentMusic.al.name
+      this.setData({
+        isPlaying: true
+      })
+      wx.hideLoading()
+    })
   },
-
+  toggle() {
+    this.setData({
+      isPlaying: !this.data.isPlaying
+    })
+    if (this.data.isPlaying) {
+      audioManager.play()
+    } else {
+      audioManager.pause()
+    }
+  },
+  onNext() {
+    currentIndex++
+    if (currentIndex === musiclist.length) {
+      currentIndex = 0
+    }    
+    this.loadMusic()
+  },
+  onPrev() {
+    currentIndex--
+    if (currentIndex < 0) {
+      currentIndex = musiclist.length - 1
+      console.log(currentIndex)
+    }
+    this.loadMusic()
+  },
 
   /**
    * 生命周期函数--监听页面初次渲染完成

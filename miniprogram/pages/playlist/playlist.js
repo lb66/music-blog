@@ -88,7 +88,7 @@ Page({
         $url:'playlist'
       }
     }).then((res) => {
-      console.log(res)
+      // console.log(res)
       this.setData({
         playlist: this.data.playlist.concat(res.result.data)
       })

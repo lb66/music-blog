@@ -4,8 +4,6 @@ Component({
     playlist: Object
   },
 
-
-
   data: {
     _count: 0
   },
