@@ -5,15 +5,24 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    picUrl:'cc'
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-console.log(options)
+    const currentMusic = wx.getStorageSync('musiclist')[options.index]
+    wx.setNavigationBarTitle({
+      title: currentMusic.name,
+    })
+    console.log(currentMusic)
+    this.setData({
+      picUrl:currentMusic.al.picUrl
+    })
+    console.log(this.data.picUrl)
   },
+
 
   /**
    * 生命周期函数--监听页面初次渲染完成

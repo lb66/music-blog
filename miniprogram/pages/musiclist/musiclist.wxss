@@ -1,7 +1,7 @@
 .detail-container{
   height: 320rpx;
-  filter:blur(40rpx);
-  opacity:0.4;
+  filter:blur(30rpx);
+  opacity:0.5;
 }
 .detail-mask{
   position: absolute;
