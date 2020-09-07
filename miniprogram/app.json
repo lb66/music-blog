@@ -3,7 +3,9 @@
     "pages/playlist/playlist",
     "pages/blog/blog",
     "pages/profile/profile",
-    "components/playlist/playlist"
+    "pages/musiclist/musiclist",
+    "components/playlist/playlist",
+    "components/musiclist/musiclist"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",
