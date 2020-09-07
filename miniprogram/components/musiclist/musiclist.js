@@ -1,15 +1,25 @@
 // components/musiclist/musiclist.js
 Component({
-  properties:{
-    musiclist:Array
+  properties: {
+    musiclist: Array
   },
   /**
    * 页面的初始数据
    */
   data: {
-
+    playingId: -1
   },
-
+  methods: {
+    onSelect(event) {
+      // console.log(event)
+      this.setData({
+        playingId: event.currentTarget.dataset.musicid
+      })
+      wx.navigateTo({
+        url: `../../pages/player/player?musicId=${this.data.playingId}`
+      })
+    }
+  },
   /**
    * 生命周期函数--监听页面加载
    */

@@ -4,6 +4,10 @@
   align-items: center;
 }
 
+.selected view{
+  color: #d43c33
+}
+
 .musiclist-index {
   color: #888;
   font-size: 34rpx;
