@@ -3,7 +3,6 @@
 const audioManager = wx.getBackgroundAudioManager()
 let currentIndex = 0
 let musiclist = []
-let currentMusic = {}
 Page({
 
   /**
@@ -24,13 +23,14 @@ Page({
   },
   loadMusic() {
     audioManager.stop()
-    currentMusic = musiclist[currentIndex]
+    let currentMusic = musiclist[currentIndex]
     console.log(currentMusic)
     wx.setNavigationBarTitle({
       title: currentMusic.name,
     })
     this.setData({
-      picUrl: currentMusic.al.picUrl
+      picUrl: currentMusic.al.picUrl,
+      isPlaying:false
     })
     wx.showLoading({
       title: '歌曲加载中',
