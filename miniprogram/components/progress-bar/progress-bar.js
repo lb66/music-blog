@@ -3,6 +3,7 @@ let areaWidth = 0
 let pointWidth = 0
 let audioManager = wx.getBackgroundAudioManager()
 let _sec = -1
+let isMoving=false
 Component({
   /**
    * 组件的属性列表
@@ -32,6 +33,7 @@ Component({
     onChange(event) {
       // console.log(event)
       if (event.detail.source === 'touch') {
+        isMoving=true
         this.data.progress = event.detail.x / (areaWidth - pointWidth) * 100
         this.data.movableDies = event.detail.x
       }
@@ -42,6 +44,7 @@ Component({
         progress: this.data.progress,
         movableDies: this.data.movableDies,
       })
+      isMoving=false
     },
     getMovableDies() {
       const query = this.createSelectorQuery()
@@ -73,13 +76,13 @@ Component({
           }, 200)
         }),
         audioManager.onPlay(() => {
-          console.log('onPlay')
+          isMoving=false
         }),
         audioManager.onTimeUpdate(() => {
           // console.log(audioManager.currentTime)
           const currentTime = this._dateFormat(audioManager.currentTime)
           let sec = audioManager.currentTime.toString().split('.')[0]
-          if (sec !== _sec) {
+          if (sec !== _sec && !isMoving) {
             this.setData({
               ['showTime.currentTime']: `${currentTime.min}:${currentTime.sec}`,
               movableDies: (areaWidth - pointWidth) * audioManager.currentTime / audioManager.duration,
