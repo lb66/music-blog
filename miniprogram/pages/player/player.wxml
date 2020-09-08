@@ -1,15 +1,18 @@
 <view class="player-container" style="background:url({{picUrl}}) no-repeat center/cover"></view>
 <view class="player-mask"></view>
 <view class="player-info">
-	<view class="player-disc {{isPlaying===true? 'play':''}}">
+	<view class="player-disc {{isPlaying===true? 'play':''}}" bindtap="toggleLyric" hidden="{{isShowLyric}}">
 		<view class="player-img rotation {{isPlaying===true? '':'rotation-paused'}}" style="background:url({{picUrl}}) no-repeat center/cover"></view>
 	</view>
+	<view class="lyric" hidden="{{!isShowLyric}}" bindtap="toggleLyric">
+		<m-lyric lyric="{{lyric}}"/>
+	</view>
 	<view class="progress-bar">
-		<m-progress-bar bindtoNextSong="onNext"/>
+		<m-progress-bar bindtoNextSong="onNext" />
 	</view>
 	<view class="player-control">
 		<text bindtap="onPrev" class="iconfont icon-previous"></text>
-		<text bindtap="toggle" class="iconfont {{isPlaying===true? 'icon-pause':'icon-play'}}" ></text>
+		<text bindtap="switch" class="iconfont {{isPlaying===true? 'icon-pause':'icon-play'}}" ></text>
 		<text bindtap="onNext" class="iconfont icon-next"></text>
 	</view>
 </view>

@@ -9,8 +9,10 @@ Page({
    * 页面的初始数据
    */
   data: {
-    picUrl: 'cc',
-    idPlaying: false
+    picUrl: '',
+    idPlaying: false,
+    isShowLyric: false,
+    lyric:''
   },
 
   /**
@@ -30,11 +32,12 @@ Page({
     })
     this.setData({
       picUrl: currentMusic.al.picUrl,
-      isPlaying:false
+      isPlaying: false
     })
     wx.showLoading({
       title: '歌曲加载中',
     })
+    //读取音乐url并开始播放
     wx.cloud.callFunction({
       name: 'music',
       data: {
@@ -54,8 +57,20 @@ Page({
       })
       wx.hideLoading()
     })
+    wx.cloud.callFunction({
+      name: 'music',
+      data: {
+        musicId: currentMusic.id,
+        $url: 'lyric'
+      }
+    }).then((res) => {
+      let lyric = JSON.parse(res.result).musiclyric || '暂无歌词'
+      this.setData({
+        lyric
+      })
+    })
   },
-  toggle() {
+  switch () {
     this.setData({
       isPlaying: !this.data.isPlaying
     })
@@ -69,7 +84,7 @@ Page({
     currentIndex++
     if (currentIndex === musiclist.length) {
       currentIndex = 0
-    }    
+    }
     this.loadMusic()
   },
   onPrev() {
@@ -78,6 +93,11 @@ Page({
       currentIndex = musiclist.length - 1
     }
     this.loadMusic()
+  },
+  toggleLyric() {
+    this.setData({
+      isShowLyric: !this.data.isShowLyric
+    })
   },
 
   /**
