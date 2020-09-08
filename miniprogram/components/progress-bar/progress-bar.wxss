@@ -1,0 +1,27 @@
+.container{
+  display: flex;
+  align-items: center;
+}
+.control{
+  position: relative;
+  flex-grow:1;
+}
+.area{
+  width: 100%;
+  height: 34rpx;
+  position: absolute;
+  bottom: -14rpx;
+  left: 0;
+}
+.point{
+  width: 32rpx;
+  height: 32rpx;
+  border-radius: 50%;
+  background-color: #fefefe;
+}
+.time{
+  width: 64rpx;
+  padding: 0 20rpx;
+  font-size: 24rpx;
+  color: #fefefe;
+}

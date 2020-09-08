@@ -42,11 +42,11 @@ Page({
         $url: 'musicUrl'
       }
     }).then((res) => {
-      console.log(JSON.parse(res.result))
+      // console.log(JSON.parse(res.result))
       let result = JSON.parse(res.result)
       audioManager.src = result.data[0].url
       audioManager.title = currentMusic.name
-      audioManager.coverImgUrl = currentMusic.al.picUrl
+      // audioManager.coverImgUrl = currentMusic.al.picUrl
       audioManager.singer = currentMusic.ar[0].name
       audioManager.epname = currentMusic.al.name
       this.setData({
@@ -76,7 +76,6 @@ Page({
     currentIndex--
     if (currentIndex < 0) {
       currentIndex = musiclist.length - 1
-      console.log(currentIndex)
     }
     this.loadMusic()
   },
