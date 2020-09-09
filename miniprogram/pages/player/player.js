@@ -3,6 +3,7 @@
 const audioManager = wx.getBackgroundAudioManager()
 let currentIndex = 0
 let musiclist = []
+const app = getApp()
 Page({
 
   /**
@@ -12,7 +13,7 @@ Page({
     picUrl: '',
     idPlaying: false,
     isShowLyric: false,
-    lyric:''
+    lyric: ''
   },
 
   /**
@@ -34,6 +35,7 @@ Page({
       picUrl: currentMusic.al.picUrl,
       isPlaying: false
     })
+    app.setPlayMusicId(currentMusic.id)
     wx.showLoading({
       title: '歌曲加载中',
     })
@@ -68,6 +70,11 @@ Page({
       this.setData({
         lyric
       })
+    }).catch((err) => {
+      let lyric = '暂无歌词'
+      this.setData({
+        lyric
+      })
     })
   },
   switch () {
@@ -99,7 +106,9 @@ Page({
       isShowLyric: !this.data.isShowLyric
     })
   },
-
+  updateTime(event) {
+    this.selectComponent(".lyric").update(event.detail.nowTime)
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

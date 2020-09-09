@@ -80,6 +80,7 @@ Component({
         }),
         audioManager.onTimeUpdate(() => {
           // console.log(audioManager.currentTime)
+          const nowTime=audioManager.currentTime
           const currentTime = this._dateFormat(audioManager.currentTime)
           let sec = audioManager.currentTime.toString().split('.')[0]
           if (sec !== _sec && !isMoving) {
@@ -89,6 +90,7 @@ Component({
               progress: audioManager.currentTime / audioManager.duration * 100
             })
             _sec = sec
+            this.triggerEvent('timeUpdate',{nowTime})
           }
         })
     },

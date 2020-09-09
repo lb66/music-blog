@@ -1,4 +1,5 @@
 // components/musiclist/musiclist.js
+const app = getApp()
 Component({
   properties: {
     musiclist: Array
@@ -18,6 +19,13 @@ Component({
       })
       wx.navigateTo({
         url: `../../pages/player/player?musicId=${x.musicid}&index=${x.index}`
+      })
+    }
+  },
+  pageLifetimes:{
+    show(){
+      this.setData({
+        playingId:app.getPlayMusicId()
       })
     }
   },
