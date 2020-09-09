@@ -3,13 +3,13 @@ let areaWidth = 0
 let pointWidth = 0
 let audioManager = wx.getBackgroundAudioManager()
 let _sec = -1
-let isMoving=false
+let isMoving = false
 Component({
   /**
    * 组件的属性列表
    */
   properties: {
-
+    isSame: Boolean
   },
 
   /**
@@ -25,6 +25,9 @@ Component({
   },
   lifetimes: {
     ready() {
+      if (this.properties.isSame && this.data.showTime.totalTime === '00:00') {
+        this.setTotalTime()
+      }
       this.getMovableDies()
       this.bindBgmEvent()
     }
@@ -33,7 +36,7 @@ Component({
     onChange(event) {
       // console.log(event)
       if (event.detail.source === 'touch') {
-        isMoving=true
+        isMoving = true
         this.data.progress = event.detail.x / (areaWidth - pointWidth) * 100
         this.data.movableDies = event.detail.x
       }
@@ -44,7 +47,7 @@ Component({
         progress: this.data.progress,
         movableDies: this.data.movableDies,
       })
-      isMoving=false
+      isMoving = false
     },
     getMovableDies() {
       const query = this.createSelectorQuery()
@@ -56,31 +59,38 @@ Component({
         // console.log(areaWidth, pointWidth)
       })
     },
+    setTotalTime() {
+      //有时无法直接获取总秒数，放在定时器里可以获取
+      setTimeout(() => {
+        // console.log(audioManager.duration)//总秒数
+        const durationTime = this._dateFormat(audioManager.duration)
+        this.setData({
+          ['showTime.totalTime']: `${durationTime.min}:${durationTime.sec}`
+        })
+      }, 200)
+    },
     bindBgmEvent() {
-      audioManager.onEnded(()=>{
-        this.triggerEvent('toNextSong')
-      })
-      audioManager.onError((res) => {
+      audioManager.onEnded(() => {
+          this.triggerEvent('toNextSong')
+        }),
+        audioManager.onError((res) => {
           wx.showToast({
             title: '错误：' + res.errCode,
           })
         }),
         audioManager.onCanplay(() => {
-          //有时无法直接获取总秒数，放在定时器里可以获取
-          setTimeout(() => {
-            // console.log(audioManager.duration)//总秒数
-            const durationTime = this._dateFormat(audioManager.duration)
-            this.setData({
-              ['showTime.totalTime']: `${durationTime.min}:${durationTime.sec}`
-            })
-          }, 200)
+          this.setTotalTime()
         }),
         audioManager.onPlay(() => {
-          isMoving=false
+          isMoving = false,
+            this.triggerEvent('musicPlay')
+        }),
+        audioManager.onPause(() => {
+          this.triggerEvent('musicPause')
         }),
         audioManager.onTimeUpdate(() => {
           // console.log(audioManager.currentTime)
-          const nowTime=audioManager.currentTime
+          const nowTime = audioManager.currentTime
           const currentTime = this._dateFormat(audioManager.currentTime)
           let sec = audioManager.currentTime.toString().split('.')[0]
           if (sec !== _sec && !isMoving) {
@@ -90,7 +100,9 @@ Component({
               progress: audioManager.currentTime / audioManager.duration * 100
             })
             _sec = sec
-            this.triggerEvent('timeUpdate',{nowTime})
+            this.triggerEvent('timeUpdate', {
+              nowTime
+            })
           }
         })
     },

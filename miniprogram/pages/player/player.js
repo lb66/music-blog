@@ -13,7 +13,8 @@ Page({
     picUrl: '',
     idPlaying: false,
     isShowLyric: false,
-    lyric: ''
+    lyric: '',
+    isSame: false
   },
 
   /**
@@ -25,9 +26,20 @@ Page({
     this.loadMusic()
   },
   loadMusic() {
-    audioManager.stop()
     let currentMusic = musiclist[currentIndex]
     console.log(currentMusic)
+    if (currentMusic.id === app.getPlayMusicId()) {
+      this.setData({
+        isSame: true
+      })
+    } else {
+      this.setData({
+        isSame: false
+      })
+    }
+    if(!this.data.isSame){
+      audioManager.stop()
+    }
     wx.setNavigationBarTitle({
       title: currentMusic.name,
     })
@@ -48,12 +60,14 @@ Page({
       }
     }).then((res) => {
       // console.log(JSON.parse(res.result))
-      let result = JSON.parse(res.result)
-      audioManager.src = result.data[0].url
-      audioManager.title = currentMusic.name
-      // audioManager.coverImgUrl = currentMusic.al.picUrl
-      audioManager.singer = currentMusic.ar[0].name
-      audioManager.epname = currentMusic.al.name
+      let result = JSON.parse(res.result)    
+      if (!this.data.isSame) {
+        audioManager.src = result.data[0].url
+        audioManager.title = currentMusic.name
+        audioManager.coverImgUrl = currentMusic.al.picUrl
+        audioManager.singer = currentMusic.ar[0].name
+        audioManager.epname = currentMusic.al.name
+      }
       this.setData({
         isPlaying: true
       })
@@ -108,6 +122,16 @@ Page({
   },
   updateTime(event) {
     this.selectComponent(".lyric").update(event.detail.nowTime)
+  },
+  musicPlay() {
+    this.setData({
+      isPlaying: true
+    })
+  },
+  musicPause() {
+    this.setData({
+      isPlaying: false
+    })
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

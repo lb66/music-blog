@@ -8,7 +8,8 @@
 		<m-lyric lyric="{{lyric}}" class="lyric"/>
 	</view>
 	<view class="progress-bar">
-		<m-progress-bar bind:toNextSong="onNext" bind:timeUpdate='updateTime'/>
+		<m-progress-bar bind:toNextSong="onNext" bind:timeUpdate='updateTime'
+		 bind:musicPlay='musicPlay' bind:musicPause='musicPause' isSame="{{isSame}}"/>
 	</view>
 	<view class="player-control">
 		<text bindtap="onPrev" class="iconfont icon-previous"></text>
