@@ -1,2 +1,15 @@
-<!--pages/blog/blog.wxml-->
-<text>pages/blog/blog.wxml</text>
+<view class="container">
+	<view class="header">
+		<view class="publish-wrapper" bindtap="onPublish">
+			<i class="iconfont icon-write"></i>
+		</view>
+		<view class="search-container">
+			<m-search iconfont='iconfont' icon-search='icon-search' />
+		</view>
+	</view>
+
+	<m-bottom-popup showPopup="{{showPopup}}">
+		<view slot='title'>title</view>
+		<view slot='content'>content</view>
+	</m-bottom-popup>
+</view>

@@ -1,0 +1,7 @@
+<view class="container" hidden='{{!showPopup}}'>
+  <view class="wrapper">
+    <i class="iconfont icon-close" bindtap='onClose'></i>
+    <slot name='title'/>
+    <slot name='content'/>
+  </view>
+</view>
