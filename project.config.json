@@ -76,6 +76,13 @@
 					"pathName": "pages/blog/blog",
 					"query": "",
 					"scene": null
+				},
+				{
+					"id": 3,
+					"name": "pages/blog-edit/blog-edit",
+					"pathName": "pages/blog-edit/blog-edit",
+					"query": "nickName:=🌀 &avatarUrl= https://thirdwx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLW…KFunqzaIukOrYnDnyCbqkuJ1YASfTtSViccs90OTjojyA/132",
+					"scene": null
 				}
 			]
 		}

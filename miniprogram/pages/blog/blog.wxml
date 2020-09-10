@@ -8,8 +8,6 @@
 		</view>
 	</view>
 
-	<m-bottom-popup showPopup="{{showPopup}}">
-		<view slot='title'>title</view>
-		<view slot='content'>content</view>
-	</m-bottom-popup>
+	<m-login showPopup="{{showPopup}}" 
+	bind:loginSuccess='loginSuccess' bind:loginFail='loginFail'></m-login>
 </view>

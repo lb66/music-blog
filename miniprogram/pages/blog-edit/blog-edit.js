@@ -1,47 +1,42 @@
-// pages/blog/blog.js
+// pages/blog-edit/blog-edit.js
+const Max_Num = 140
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    showPopup: false
+    wordsNum: '最大字数：140',
+    footerBottom: 0
   },
-  loginSuccess(event) {
-    // console.log(event.detail)
-    const detail=event.detail
-    wx.navigateTo({
-      url: `../blog-edit/blog-edit?nickName=${detail.nickName}&avatarUrl=${detail.avatarUrl}`,
+  onFocus(event){
+    //获取键盘高度
+    this.setData({
+      footerBottom:event.detail.height
     })
   },
-  loginFail() {
-    wx.showModal({
-      title: '提示',
-      content: '请允许获取微信授权信息',
+  onBlur(){
+    this.setData({
+      footerBottom:0
     })
   },
-  onPublish() {
-    wx.getSetting({
-      success: (res) => {
-        if (res.authSetting['scope.userInfo']) {
-          wx.getUserInfo({
-            success: (res) => {
-             this.loginSuccess({detail:res.userInfo})
-            }
-          })
-        } else {
-          this.setData({
-            showPopup: true
-          })
-        }
-      }
-    })
+  onInput(event) {
+    let num = event.detail.value.length
+    if (num < Max_Num) {
+      this.setData({
+        wordsNum: '当前字数：' + num
+      })
+    } else {
+      this.setData({
+        wordsNum: '最大字数：140'
+      })
+    }
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    console.log(options)
   },
 
   /**

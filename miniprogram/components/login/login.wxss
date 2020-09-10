@@ -1,0 +1,6 @@
+button {
+  font-size: 32rpx;
+  background-color: #d43c33;
+  color: #fff;
+  height: 80rpx;
+}
