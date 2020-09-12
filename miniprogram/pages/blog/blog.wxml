@@ -4,7 +4,7 @@
 			<i class="iconfont icon-write"></i>
 		</view>
 		<view class="search-container">
-			<m-search iconfont='iconfont' icon-search='icon-search' />
+			<m-search iconfont='iconfont' icon-search='icon-search' bindsearch='onSearch'/>
 		</view>
 	</view>
 	<view class="blog-list">

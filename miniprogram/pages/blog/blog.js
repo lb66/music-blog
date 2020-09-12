@@ -1,6 +1,5 @@
-// pages/blog/blog.js
+let keyword
 Page({
-
   /**
    * 页面的初始数据
    */
@@ -9,7 +8,6 @@ Page({
     blogList:[]
   },
   loginSuccess(event) {
-    // console.log(event.detail)
     const detail=event.detail
     wx.navigateTo({
       url: `../blog-edit/blog-edit?nickName=${detail.nickName}&avatarUrl=${detail.avatarUrl}`,
@@ -38,6 +36,13 @@ Page({
       }
     })
   },
+  onSearch(event){
+    keyword=event.detail.keyword
+    this.setData({
+      blogList: []
+    })
+    this._getBlogList()
+  },
   _getBlogList(){
     wx.showLoading({
       title: '加载中',
@@ -45,6 +50,7 @@ Page({
     wx.cloud.callFunction({         
       name:'blog',            
       data:{
+        keyword,
         start:this.data.blogList.length,
         count:10 ,
         $url:'list'

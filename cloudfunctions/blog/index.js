@@ -9,7 +9,17 @@ exports.main = async (event, context) => {
     event
   })
   app.router('list', async (ctx, next) => {
-    ctx.body = await cloud.database().collection('blog')
+    const keyword=event.keyword
+    let searchContent={}
+    if(keyword){
+      searchContent={
+        content:cloud.database().RegExp({
+          regexp:keyword,
+          options:'i'//忽略大小写
+        })
+      }
+    }
+    ctx.body = await cloud.database().collection('blog').where(searchContent)
       .skip(event.start).limit(event.count)
       .orderBy('createTime', 'desc').get()
       .then((res) => {

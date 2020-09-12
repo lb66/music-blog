@@ -1,4 +1,4 @@
 <view class="container">
-	<input class="input" placeholder="{{placeholder}}"></input>
+	<input class="input" placeholder="{{placeholder}}" bindinput="onInput"></input>
   <text class="iconfont icon-search icon" bindtap="onSearch" ></text>
 </view>
