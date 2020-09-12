@@ -73,8 +73,12 @@ Page({
     })
   },
   onPublish() {
+    if(content===''){
+      return
+    }
     wx.showLoading({
       title: '上传中',
+      mask: true
     })
     let promiseArr = []
     let fileIds = []
@@ -103,8 +107,14 @@ Page({
           createTime: wx.cloud.database().serverDate()
         }
       }).then((res) => {
+        content=''
         wx.hideLoading()
+        //返回上一页并刷新
         wx.navigateBack()
+        const currentPage=getCurrentPages()
+        console.log(currentPage)
+        const prevPage=currentPage[currentPage.length-2]
+        prevPage.onPullDownRefresh()
         wx.showToast({
           title: '发表成功',
         })
