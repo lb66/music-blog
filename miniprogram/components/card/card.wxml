@@ -2,7 +2,7 @@
 	<view class="blog-title">
 		<image class="blog-portrait" src="{{blog.avatarUrl}}"></image>
 		<view class="blog-box">
-			<view>{{blog.nickName}}</view>
+			<view class="nick-name">{{blog.nickName}}</view>
 			<view class="blog-time">{{_createTime}}</view>
 		</view>
 	</view>
