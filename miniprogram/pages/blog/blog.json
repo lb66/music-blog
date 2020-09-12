@@ -1,7 +1,9 @@
 {
   "usingComponents": {
     "m-search":"/components/search/search",
-    "m-login":"/components/login/login"
+    "m-login":"/components/login/login",
+    "m-card":"/components/card/card"
   },
-  "navigationBarTitleText": "发现"
+  "navigationBarTitleText": "发现",
+  "enablePullDownRefresh":true
 }

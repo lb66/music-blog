@@ -24,3 +24,10 @@
 .search-container{
   flex-grow: 1;
 }
+.blog-list{
+  margin-top: 120rpx;
+}
+.blog-card{
+  margin-bottom: 20rpx;
+  box-sizing: border-box;
+}

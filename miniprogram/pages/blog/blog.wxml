@@ -7,7 +7,12 @@
 			<m-search iconfont='iconfont' icon-search='icon-search' />
 		</view>
 	</view>
-
-	<m-login showPopup="{{showPopup}}" 
-	bind:loginSuccess='loginSuccess' bind:loginFail='loginFail'></m-login>
+	<view class="blog-list">
+		<block wx:for="{{blogList}}" wx:key="_id">
+			<view class="blog-card">
+				<m-card blog="{{item}}" bindtap='toComment' data-blogid='{{item._id}}'/>
+			</view>
+		</block>
+	</view>
+	<m-login showPopup="{{showPopup}}" bind:loginSuccess='loginSuccess' bind:loginFail='loginFail'></m-login>
 </view>

@@ -1,7 +1,6 @@
 // pages/blog-edit/blog-edit.js
 const Max_WordsNum = 140
 const Max_ImageNum = 9
-
 let content = ''
 let userInfo = {}
 Page({
@@ -105,13 +104,12 @@ Page({
         }
       }).then((res) => {
         wx.hideLoading()
+        wx.navigateBack()
         wx.showToast({
           title: '发表成功',
         })
-        wx.navigateBack()
       })
     }).catch((err) => {
-      console.log('fail')
       wx.hideLoading()
       wx.showToast({
         title: '发表失败',

@@ -1,0 +1,41 @@
+page{
+  background-color: #f1f1f1;
+}
+.blog{
+  padding: 20rpx;
+  background-color: #fff;
+}
+.blog-title{
+  display: flex;
+}
+.blog-portrait{
+  width: 72rpx;
+  height: 72rpx;
+  border-radius: 50%;
+  margin-bottom: 6rpx ;
+}
+.blog-box{
+  margin-left: 20rpx;
+}
+.blog-time{
+  margin-top: 6rpx;
+  font-size: 24rpx;
+  color: grey;
+}
+.blog-content{
+  margin: 10rpx 0;
+  width: 710rpx;
+  word-wrap: break-word;
+  word-break: break-all;
+}
+.blog-img{
+  display: flex;
+  margin-right: -10rpx;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.img{
+  width: 230rpx;
+  height: 230rpx;
+  margin: 10rpx 10rpx 0rpx 0;
+}
