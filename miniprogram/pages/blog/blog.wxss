@@ -1,4 +1,4 @@
-.header{
+.header {
   display: flex;
   align-items: center;
   padding: 0 20rpx;
@@ -11,23 +11,80 @@
   z-index: 99;
   box-sizing: border-box;
 }
-.icon-write{
+
+.icon-write {
   font-size: 48rpx;
 }
-.publish-wrapper{
+
+.publish-wrapper {
   width: 75rpx;
   height: 75rpx;
   display: flex;
   align-items: center;
   justify-content: center;
 }
-.search-container{
+
+.search-container {
   flex-grow: 1;
 }
-.blog-list{
+
+.blog-list {
   margin-top: 120rpx;
 }
-.blog-card{
+
+.blog-card {
   margin-bottom: 20rpx;
   box-sizing: border-box;
+}
+
+.ctrl {
+  display: flex;
+  background-color: #fff;
+  padding-bottom: 10rpx;
+}
+
+.ctrl-item {
+  flex: 1;
+  text-align: center;
+  color: rgba(40, 47, 60, 0.8);
+  font-size: 26rpx;
+  height: 60rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon {
+  margin-right: 12rpx;
+  font-size: 44rpx;
+}
+
+.comment-wrapper {
+  width: 100%;
+  display: flex;
+  position: relative;
+}
+
+.comment-content {
+  margin: 20rpx 145rpx 10rpx 20rpx;
+  border-radius: 20px;
+  text-align: start;
+  background-color: #eee;
+  padding: 20rpx;
+}
+
+.send {
+  position: absolute;
+  background-color: #d43c33;
+  color: #fff;
+  font-size: 24rpx;
+  height: 66rpx;
+  bottom: 10rpx;
+  right: 10rpx;
+}
+
+button:not([size='mini']) {
+  width: auto !important;
+  padding: 8px 16px;
+
 }

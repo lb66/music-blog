@@ -4,15 +4,31 @@
 			<i class="iconfont icon-write"></i>
 		</view>
 		<view class="search-container">
-			<m-search iconfont='iconfont' icon-search='icon-search' bindsearch='onSearch'/>
+			<m-search iconfont='iconfont' icon-search='icon-search' bindsearch='onSearch' />
 		</view>
 	</view>
 	<view class="blog-list">
 		<block wx:for="{{blogList}}" wx:key="_id">
 			<view class="blog-card">
-				<m-card blog="{{item}}" bindtap='toComment' data-blogid='{{item._id}}'/>
+				<m-card blog="{{item}}" bindtap='toComment' data-blogid='{{item._id}}' />
+				<view class="ctrl">
+					<view class="ctrl-item" bindtap="onComment">
+						<i class="iconfont icon-comment icon"></i>
+						<text>评论</text>
+					</view>
+					<view class="ctrl-item share" bindtap="onShare">
+						<i class="iconfont icon-share icon"></i>
+						<text>分享</text>
+					</view>
+				</view>
 			</view>
 		</block>
 	</view>
-	<m-login showPopup="{{showPopup}}" bind:loginSuccess='loginSuccess' bind:loginFail='loginFail'></m-login>
+	<m-login showPopup="{{showLogin}}" bind:loginSuccess='loginSuccess' bind:loginFail='loginFail'></m-login>
+	<m-bottom-popup showPopup="{{showPopup}}">
+		<view slot='content' class='comment-wrapper'>
+			<textarea class='comment-content' placeholder="写评论..." value='{{content}}' fixed="true"></textarea>
+			<button class="send" bindtap="onSend">发送</button>
+		</view>
+	</m-bottom-popup>
 </view>

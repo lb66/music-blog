@@ -1,17 +1,17 @@
 let keyword
+let userInfo
 Page({
   /**
    * 页面的初始数据
    */
   data: {
-    showPopup: false,
-    blogList:[]
+    showLogin: false,
+    blogList:[],
+    showPopup:false,
+    content:''
   },
   loginSuccess(event) {
-    const detail=event.detail
-    wx.navigateTo({
-      url: `../blog-edit/blog-edit?nickName=${detail.nickName}&avatarUrl=${detail.avatarUrl}`,
-    })
+    console.log('登录成功',event)
   },
   loginFail() {
     wx.showModal({
@@ -25,15 +25,43 @@ Page({
         if (res.authSetting['scope.userInfo']) {
           wx.getUserInfo({
             success: (res) => {
-             this.loginSuccess({detail:res.userInfo})
+             userInfo=res.userInfo
+             wx.navigateTo({
+              url: `../blog-edit/blog-edit?nickName=${userInfo.nickName}&avatarUrl=${userInfo.avatarUrl}`,
+            })
             }
           })
         } else {
           this.setData({
-            showPopup: true
+            showLogin: true
           })
         }
       }
+    })
+  },
+  onComment() {
+    wx.getSetting({
+      success: (res) => {
+        if (res.authSetting['scope.userInfo']) {
+          wx.getUserInfo({
+            success: (res) => {
+             userInfo=res.userInfo
+             this.setData({
+               showPopup:true
+             })
+            }
+          })
+        } else {
+          this.setData({
+            showLogin: true
+          })
+        }
+      }
+    })
+  },
+  onSend(){
+    this.setData({
+      showPopup:false
     })
   },
   onSearch(event){

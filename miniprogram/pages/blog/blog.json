@@ -2,7 +2,9 @@
   "usingComponents": {
     "m-search":"/components/search/search",
     "m-login":"/components/login/login",
-    "m-card":"/components/card/card"
+    "m-card":"/components/card/card",
+    "m-bottom-popup":"/components/bottom-popup/bottom-popup"
+    
   },
   "navigationBarTitleText": "发现",
   "enablePullDownRefresh":true
