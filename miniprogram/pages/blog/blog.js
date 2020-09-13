@@ -1,17 +1,19 @@
 let keyword
 let userInfo
+let content = ''
+const db = wx.cloud.database()
 Page({
   /**
    * 页面的初始数据
    */
   data: {
     showLogin: false,
-    blogList:[],
-    showPopup:false,
-    content:''
+    blogList: [],
+    showPopup: false,
+    blogId: ''
   },
   loginSuccess(event) {
-    console.log('登录成功',event)
+    console.log('登录成功', event)
   },
   loginFail() {
     wx.showModal({
@@ -25,10 +27,10 @@ Page({
         if (res.authSetting['scope.userInfo']) {
           wx.getUserInfo({
             success: (res) => {
-             userInfo=res.userInfo
-             wx.navigateTo({
-              url: `../blog-edit/blog-edit?nickName=${userInfo.nickName}&avatarUrl=${userInfo.avatarUrl}`,
-            })
+              userInfo = res.userInfo
+              wx.navigateTo({
+                url: `../blog-edit/blog-edit?nickName=${userInfo.nickName}&avatarUrl=${userInfo.avatarUrl}`,
+              })
             }
           })
         } else {
@@ -39,16 +41,19 @@ Page({
       }
     })
   },
-  onComment() {
+  onComment(event) {
+    this.setData({
+      blogId: event.target.dataset.blogid
+    })
     wx.getSetting({
       success: (res) => {
         if (res.authSetting['scope.userInfo']) {
           wx.getUserInfo({
             success: (res) => {
-             userInfo=res.userInfo
-             this.setData({
-               showPopup:true
-             })
+              userInfo = res.userInfo
+              this.setData({
+                showPopup: true,
+              })
             }
           })
         } else {
@@ -59,43 +64,65 @@ Page({
       }
     })
   },
-  onSend(){
-    this.setData({
-      showPopup:false
+  onInput(event) {
+    content = event.detail.value
+  },
+  onSend() {
+    if (content.trim() === '') {
+      return
+    }
+    wx.showLoading({
+      title: '发送中',
+      mask: true
+    })
+    db.collection('blog-comment').add({
+      data: {
+        content,
+        blogId:this.data.blogId,
+        createTime: db.serverDate(),
+        nickName: userInfo.nickName,
+        avatarUrl: userInfo.avatarUrl
+      }
+    }).then(res => {
+      wx.hideLoading()
+      content=''
+      this.setData({
+        showPopup: false
+      })
     })
   },
-  onSearch(event){
-    keyword=event.detail.keyword
+  onSearch(event) {
+    keyword = event.detail.keyword
     this.setData({
       blogList: []
     })
     this._getBlogList()
   },
-  _getBlogList(){
+  _getBlogList() {
     wx.showLoading({
       title: '加载中',
     })
-    wx.cloud.callFunction({         
-      name:'blog',            
-      data:{
+    wx.cloud.callFunction({
+      name: 'blog',
+      data: {
         keyword,
-        start:this.data.blogList.length,
-        count:10 ,
-        $url:'list'
+        start: this.data.blogList.length,
+        count: 10,
+        $url: 'list'
       }
-    }).then((res)=>{
+    }).then((res) => {
       // console.log(res)
       this.setData({
-        blogList:this.data.blogList.concat(res.result.data) 
+        blogList: this.data.blogList.concat(res.result.data)
       })
       console.log(this.data.blogList)
       wx.stopPullDownRefresh()
       wx.hideLoading()
     })
   },
-  toComment(event){
+  toComment(event) {
     wx.navigateTo({
-      url: '../comment/comment?blogId='+event.target.dataset.blogid,
+      url: '../comment/comment?blogId=' + event.target.dataset.blogid,
     })
   },
   /**
