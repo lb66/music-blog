@@ -12,9 +12,9 @@
 			<view class="blog-card">
 				<m-card blog="{{item}}" bindtap='toComment' data-blogid='{{item._id}}' />
 				<view class="ctrl">
-					<view class="ctrl-item" bindtap="onComment" data-blogid='{{item._id}}'>
-						<i class="iconfont icon-comment icon" data-blogid='{{item._id}}'></i>
-						<text data-blogid='{{item._id}}'>评论</text>
+					<view class="ctrl-item" bindtap="onComment" data-item='{{item}}'>
+						<i class="iconfont icon-comment icon" data-item='{{item}}'></i>
+						<text  data-item='{{item}}'>评论</text>
 					</view>
 					<view class="ctrl-item share" bindtap="onShare">
 						<i class="iconfont icon-share icon"></i>
@@ -27,7 +27,7 @@
 	<m-login showPopup="{{showLogin}}" bind:loginSuccess='loginSuccess' bind:loginFail='loginFail'></m-login>
 	<m-bottom-popup showPopup="{{showPopup}}">
 		<view slot='content' class='comment-wrapper'>
-			<textarea class='comment-content' placeholder="写评论..." bindinput="onInput" fixed="true"></textarea>
+			<textarea class='comment-content' value="{{content}}" placeholder="写评论..." bindinput="onInput" fixed="true"></textarea>
 			<button class="send" bindtap="onSend">发送</button>
 		</view>
 	</m-bottom-popup>

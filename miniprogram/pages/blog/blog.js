@@ -1,16 +1,14 @@
 let keyword
 let userInfo
-let content = ''
 const db = wx.cloud.database()
 Page({
-  /**
-   * 页面的初始数据
-   */
   data: {
     showLogin: false,
     blogList: [],
     showPopup: false,
-    blogId: ''
+    blogId: '',
+    content:'',
+    openId:''
   },
   loginSuccess(event) {
     console.log('登录成功', event)
@@ -43,8 +41,12 @@ Page({
   },
   onComment(event) {
     this.setData({
-      blogId: event.target.dataset.blogid
+      blogId: event.target.dataset.item._id
     })
+    this.setData({
+      openId: event.target.dataset.item._openid
+    })
+    console.log(event.target.dataset.item)
     wx.getSetting({
       success: (res) => {
         if (res.authSetting['scope.userInfo']) {
@@ -65,10 +67,12 @@ Page({
     })
   },
   onInput(event) {
-    content = event.detail.value
+      this.setData({
+        content:event.detail.value
+      })
   },
   onSend() {
-    if (content.trim() === '') {
+    if (this.data.content.trim() === '') {
       return
     }
     wx.showLoading({
@@ -77,18 +81,38 @@ Page({
     })
     db.collection('blog-comment').add({
       data: {
-        content,
-        blogId:this.data.blogId,
+        content:this.data.content,
+        blogId: this.data.blogId,
         createTime: db.serverDate(),
         nickName: userInfo.nickName,
         avatarUrl: userInfo.avatarUrl
       }
-    }).then(res => {
+    }).then(res=>{
       wx.hideLoading()
-      content=''
       this.setData({
         showPopup: false
       })
+    })
+    wx.cloud.callFunction({
+      name: 'sendMessage',
+      data: {
+        blogId: this.data.blogId,
+        content:this.data.content,
+        user: userInfo.nickName,
+        openId:this.data.openId
+      }
+    }).then(res => {
+      this.setData({
+        content:''
+      })
+      wx.hideLoading()
+      this.setData({
+        showPopup: false
+      })
+    })
+    wx.requestSubscribeMessage({
+      tmplIds: ['2Uhc312MBZFkLHsUwvdbFX-ll3kPgr1_mrsU5IeUk6Q'],
+      success: (res) => {}
     })
   },
   onSearch(event) {
