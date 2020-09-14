@@ -1,3 +1,6 @@
 {
-  "usingComponents": {}
+  "usingComponents": {
+    "m-card":"../../components/card/card"
+  },
+  "navigationBarTitleText": "正文"
 }

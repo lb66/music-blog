@@ -80,7 +80,7 @@
   font-size: 24rpx;
   height: 66rpx;
   bottom: 10rpx;
-  right: 10rpx;
+  right: 20rpx;
 }
 
 button:not([size='mini']) {

@@ -12,7 +12,6 @@ page{
   width: 80rpx;
   height: 80rpx;
   border-radius: 50%;
-  /* margin-bottom: 6rpx ; */
 }
 .blog-box{
   margin-left: 20rpx;
@@ -40,5 +39,6 @@ page{
   margin: 10rpx 10rpx 0rpx 0;
 }
 .nick-name{
+  color: #d43c33;
   font-size: 32rpx;
 }

@@ -40,6 +40,10 @@ Page({
     })
   },
   onComment(event) {
+    wx.requestSubscribeMessage({
+      tmplIds: ['2Uhc312MBZFkLHsUwvdbFX-ll3kPgr1_mrsU5IeUk6Q'],
+      success: (res) => {}
+    })
     this.setData({
       blogId: event.target.dataset.item._id
     })
@@ -110,10 +114,6 @@ Page({
         showPopup: false
       })
     })
-    wx.requestSubscribeMessage({
-      tmplIds: ['2Uhc312MBZFkLHsUwvdbFX-ll3kPgr1_mrsU5IeUk6Q'],
-      success: (res) => {}
-    })
   },
   onSearch(event) {
     keyword = event.detail.keyword
@@ -144,6 +144,7 @@ Page({
       wx.hideLoading()
     })
   },
+
   toComment(event) {
     wx.navigateTo({
       url: '../comment/comment?blogId=' + event.target.dataset.blogid,

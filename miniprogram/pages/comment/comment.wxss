@@ -1,1 +1,44 @@
-/* pages/comment/comment.wxss */
+.blog-card {
+  margin: 20rpx 0;
+  box-sizing: border-box;
+}
+.tab{
+  background-color: #fff;
+  padding: 20rpx;
+  font-size: 32rpx;
+  border-bottom: 1px solid #dddddd;
+}
+.comment-list{
+  background-color: #fff;
+}
+.comment{
+  display: flex;
+  padding: 20rpx 0 0 20rpx;
+}
+.wrapper{
+  padding-left: 20rpx;
+  border-bottom: 1px solid #dddddd;
+    width:100%;
+}
+.head{
+  width: 100rpx;
+}
+.portrait{
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 50%;
+}
+.nickname{
+  color: #d43c33;
+  font-size: 28rpx;
+}
+.comment-content{
+  margin-top: 6rpx;
+  word-wrap: break-word;
+  word-break: break-all;
+}
+.comment-time{
+  margin: 12rpx 0;
+  font-size: 24rpx;
+  color: grey;
+}
