@@ -7,7 +7,7 @@ cloud.init()
 exports.main = async (event, context) => {
   const result = await cloud.openapi.subscribeMessage.send({
     touser: event.openId,
-    page: `/pages/blog-comment/blog-comment?blogId=${event.blogId}`,
+    page: `/pages/comment/comment?blogId=${event.blogId}`,
     data: {
       name2: {
         value: event.user

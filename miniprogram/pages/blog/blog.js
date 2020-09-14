@@ -7,8 +7,8 @@ Page({
     blogList: [],
     showPopup: false,
     blogId: '',
-    content:'',
-    openId:''
+    content: '',
+    openId: ''
   },
   loginSuccess(event) {
     console.log('登录成功', event)
@@ -71,9 +71,9 @@ Page({
     })
   },
   onInput(event) {
-      this.setData({
-        content:event.detail.value
-      })
+    this.setData({
+      content: event.detail.value
+    })
   },
   onSend() {
     if (this.data.content.trim() === '') {
@@ -85,13 +85,13 @@ Page({
     })
     db.collection('blog-comment').add({
       data: {
-        content:this.data.content,
+        content: this.data.content,
         blogId: this.data.blogId,
         createTime: db.serverDate(),
         nickName: userInfo.nickName,
         avatarUrl: userInfo.avatarUrl
       }
-    }).then(res=>{
+    }).then(res => {
       wx.hideLoading()
       this.setData({
         showPopup: false
@@ -101,13 +101,13 @@ Page({
       name: 'sendMessage',
       data: {
         blogId: this.data.blogId,
-        content:this.data.content,
+        content: this.data.content,
         user: userInfo.nickName,
-        openId:this.data.openId
+        openId: this.data.openId
       }
     }).then(res => {
       this.setData({
-        content:''
+        content: ''
       })
       wx.hideLoading()
       this.setData({
@@ -205,7 +205,12 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
-
+  onShareAppMessage: function (event) {
+    // console.log(event)
+    let blog = event.target.dataset.blog
+    return {
+      title: blog.content.length > 30 ? blog.content.substring(0,30)+"..." : blog.content,
+      path: `/pages/comment/comment?blogId=${blog._id}`
+    }
   }
 })

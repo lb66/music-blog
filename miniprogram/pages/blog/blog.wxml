@@ -16,9 +16,11 @@
 						<i class="iconfont icon-comment icon" data-item='{{item}}'></i>
 						<text  data-item='{{item}}'>评论</text>
 					</view>
-					<view class="ctrl-item share" bindtap="onShare">
-						<i class="iconfont icon-share icon"></i>
-						<text>分享</text>
+					<view class="ctrl-item">
+						<button open-type="share" data-blog='{{item}}' class="share-button" hover-class="share-hover">
+							<i class="iconfont icon-share icon"></i>
+							<text>分享</text>
+						</button>
 					</view>
 				</view>
 			</view>
