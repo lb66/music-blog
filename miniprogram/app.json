@@ -1,4 +1,5 @@
 {
+  "cloud":true,
   "pages": [
     "pages/playlist/playlist",
     "pages/blog/blog",

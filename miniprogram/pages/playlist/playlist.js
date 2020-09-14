@@ -6,13 +6,13 @@ Page({
    */
   data: {
     swiperImgUrls: [{
-        url: 'http://p1.music.126.net/oeH9rlBAj3UNkhOmfog8Hw==/109951164169407335.jpg',
+        url: 'http://p1.music.126.net/svkymWv-Na0zmyDpEjR-tQ==/109951165316695565.jpg?imageView&quality=89',
       },
       {
-        url: 'http://p1.music.126.net/xhWAaHI-SIYP8ZMzL9NOqg==/109951164167032995.jpg',
+        url: 'http://p1.music.126.net/AGor5D2TIL1bk7jsgrvQwg==/109951165316818608.jpg?imageView&quality=89',
       },
       {
-        url: 'http://p1.music.126.net/Yo-FjrJTQ9clkDkuUCTtUg==/109951164169441928.jpg',
+        url: 'http://p1.music.126.net/UGb_NsRTgNS3zVe8zl43Ww==/109951165316790713.jpg?imageView&quality=89',
       }
     ],
     playlist: []
@@ -85,7 +85,7 @@ Page({
       data: {
         start: this.data.playlist.length,
         count: 15,
-        $url:'playlist'
+        $url: 'playlist'
       }
     }).then((res) => {
       // console.log(res)
