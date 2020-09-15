@@ -1,14 +1,14 @@
 let keyword
 let userInfo
+let blogId=''
+let openId=''
 const db = wx.cloud.database()
 Page({
   data: {
     showLogin: false,
     blogList: [],
     showPopup: false,
-    blogId: '',
     content: '',
-    openId: ''
   },
   loginSuccess(event) {
     console.log('登录成功', event)
@@ -44,12 +44,8 @@ Page({
       tmplIds: ['2Uhc312MBZFkLHsUwvdbFX-ll3kPgr1_mrsU5IeUk6Q'],
       success: (res) => {}
     })
-    this.setData({
-      blogId: event.target.dataset.item._id
-    })
-    this.setData({
-      openId: event.target.dataset.item._openid
-    })
+      blogId=event.target.dataset.item._id
+      openId= event.target.dataset.item._openid
     console.log(event.target.dataset.item)
     wx.getSetting({
       success: (res) => {
@@ -85,8 +81,8 @@ Page({
     })
     db.collection('blog-comment').add({
       data: {
+        blogId,
         content: this.data.content,
-        blogId: this.data.blogId,
         createTime: db.serverDate(),
         nickName: userInfo.nickName,
         avatarUrl: userInfo.avatarUrl
@@ -100,10 +96,10 @@ Page({
     wx.cloud.callFunction({
       name: 'sendMessage',
       data: {
-        blogId: this.data.blogId,
+        blogId,
+        openId,
         content: this.data.content,
         user: userInfo.nickName,
-        openId: this.data.openId
       }
     }).then(res => {
       this.setData({
