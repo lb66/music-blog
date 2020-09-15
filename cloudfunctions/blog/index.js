@@ -72,5 +72,16 @@ exports.main = async (event, context) => {
       commentList
     }
   })
+
+  const wxContext = cloud.getWXContext()
+  app.router('myblog', async (ctx, next) => {
+    ctx.body = await db.collection('blog').where({_openid:wxContext.OPENID})
+    .skip(event.start).limit(event.count)
+    .orderBy('createTime', 'desc').get()
+    .then((res) => {
+      return res.data
+    })
+  })
+
   return app.serve()
 }

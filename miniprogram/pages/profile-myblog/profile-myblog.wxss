@@ -1,1 +1,4 @@
-/* pages/profile-myblog/profile-myblog.wxss */
+.blog-card {
+  margin-top: 20rpx;
+  box-sizing: border-box;
+}

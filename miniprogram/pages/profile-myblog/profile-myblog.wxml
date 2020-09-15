@@ -1,2 +1,8 @@
-<!--pages/profile-myblog/profile-myblog.wxml-->
-<text>pages/profile-myblog/profile-myblog.wxml</text>
+<view class="myblog">
+	<block wx:for="{{blogList}}" wx:key="_id">
+		<view class="blog-card">
+			<m-card blog="{{item}}" bindtap='toComment' data-blogid='{{item._id}}' />
+		</view>
+	</block>
+</view>
+

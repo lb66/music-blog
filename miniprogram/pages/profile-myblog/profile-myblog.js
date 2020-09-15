@@ -5,16 +5,39 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    blogList:[]
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this._getMyBlog()
   },
-
+  _getMyBlog(){
+    wx.showLoading({
+      title: '加载中',
+    })
+    wx.cloud.callFunction({
+      name:'blog',
+      data:{
+        start: this.data.blogList.length,
+        count: 10,
+        $url:'myblog'
+      }
+    }).then(res=>{
+      console.log(res)
+      this.setData({
+        blogList: this.data.blogList.concat(res.result)
+      })
+      wx.hideLoading()
+    })
+  },
+  toComment(event) {
+    wx.navigateTo({
+      url: '../comment/comment?blogId=' + event.target.dataset.blogid,
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
