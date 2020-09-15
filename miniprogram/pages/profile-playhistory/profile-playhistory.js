@@ -1,42 +1,25 @@
-// pages/comment/comment.js
-import formatTime from '../../utils/formatTime.js'
+const app = getApp()
 Page({
+
   /**
    * 页面的初始数据
    */
   data: {
-    blog:{},
-    commentList:[]
+    musiclist:[]
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this._getComment(options.blogId)
-  },
-  _getComment(blogId){
-    wx.showLoading({
-      title: '加载中',
+    const playHistory=wx.getStorageSync(app.globalData.openid)
+    wx.setStorage({
+      key: 'musiclist',
+      data: playHistory,
     })
-    wx.cloud.callFunction({
-      name:'blog',
-      data:{
-        blogId,
-        $url:'detail'
-      }
-    }).then(res=>{
-      let commentList=res.result.commentList.data
-      for(let i=0;i<commentList.length;i++){
-        commentList[i].createTime=formatTime(new Date(commentList[i].createTime))
-      }
-      console.log(res)
       this.setData({
-        commentList,
-        blog:res.result.detail[0],
+        musiclist:playHistory
       })
-      wx.hideLoading()
-    })
   },
 
   /**

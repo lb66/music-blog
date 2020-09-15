@@ -5,3 +5,10 @@
   justify-content: space-around;
 
 }
+.title{
+  text-align: center;
+  font-size: 44rpx;
+  border-bottom: 2px solid #d43c33;
+  margin: 10rpx 20rpx;
+  padding-bottom: 10rpx;
+}

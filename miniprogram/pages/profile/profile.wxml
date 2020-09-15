@@ -1,2 +1,35 @@
-<!--pages/profile/profile.wxml-->
-<text>pages/profile/profile.wxml</text>
+<view class="header">
+	<view class="avatar-url">
+		<open-data type="userAvatarUrl"></open-data>
+	</view>
+	<open-data type="userNickName" class="nickname"></open-data>
+</view>
+<view class="nav">
+	<view class="nav-item">
+		<navigator class="content" url="/pages/profile-playhistory/profile-playhistory" hover-class="none">
+			<i class="iconfont icon-playhistory"></i>
+			<view class="text">
+				<text >最近播放</text>
+			</view>
+			<i class="iconfont icon-right"></i>
+		</navigator>
+	</view>
+	<view class="nav-item">
+		<navigator class="content" url="/pages/profile-myblog/profile-myblog" hover-class="none">
+			<i class="iconfont icon-blog"></i>
+			<view class="text">
+				<text >我的发表</text>
+			</view>
+			<i class="iconfont icon-right"></i>
+		</navigator>
+	</view>
+	<view class="nav-item">
+		<navigator class="content" hover-class="none">
+			<i class="iconfont icon-QR"></i>
+			<view class="text">
+				<text >小程序码</text>
+			</view>
+			<i class="iconfont icon-right"></i>
+		</navigator>
+	</view>
+</view>

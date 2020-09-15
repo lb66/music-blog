@@ -37,7 +37,7 @@ Page({
         isSame: false
       })
     }
-    if(!this.data.isSame){
+    if (!this.data.isSame) {
       audioManager.stop()
     }
     wx.setNavigationBarTitle({
@@ -60,13 +60,15 @@ Page({
       }
     }).then((res) => {
       // console.log(JSON.parse(res.result))
-      let result = JSON.parse(res.result)    
+      let result = JSON.parse(res.result)
       if (!this.data.isSame) {
         audioManager.src = result.data[0].url
         audioManager.title = currentMusic.name
         audioManager.coverImgUrl = currentMusic.al.picUrl
         audioManager.singer = currentMusic.ar[0].name
         audioManager.epname = currentMusic.al.name
+        //保存播放历史
+        this.savePlayHistory()
       }
       this.setData({
         isPlaying: true
@@ -132,6 +134,27 @@ Page({
     this.setData({
       isPlaying: false
     })
+  },
+
+  savePlayHistory() {
+    const music = musiclist[currentIndex]
+    const openid = app.globalData.openid
+    const history = wx.getStorageSync(openid)
+    let bHave = false
+    for (let i = 0; i < history.length; i++) {
+      if (history[i].id === music.id) {
+        bHave = true
+        break
+      }
+    }
+    if (!bHave) {
+      history.unshift(music)
+      wx.setStorage({
+        key: openid,
+        data: history,
+      })
+    }
+
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

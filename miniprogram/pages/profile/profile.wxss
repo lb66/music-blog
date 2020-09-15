@@ -1,1 +1,51 @@
-/* pages/profile/profile.wxss */
+.header {
+  background-color: #d43c33;
+  height: 480rpx;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  color: #fff;
+  font-weight: 300;
+  text-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
+}
+.avatar-url{
+  width: 200rpx;
+  height: 200rpx;
+  display: block;
+  overflow: hidden;
+  border: 6rpx solid #fff;
+  border-radius: 50%;
+}
+.nickname{
+  font-size: #fff;
+  margin-top: 20rpx;
+}
+.nav{
+  margin: 50rpx 30rpx;
+  background-color: #fff;
+  border-radius: 20rpx;
+}
+.nav-item{
+  border-bottom: 1px solid #eee;
+  padding: 24rpx;
+}
+.nav-item:last-child{
+  border-bottom:none
+}
+.content{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.text{
+  width: 100%;
+  color: grey;
+margin: 0 20rpx;
+}
+.iconfont{
+  font-size: 44rpx;
+}
+.icon-playhistory,.icon-QR,.icon-blog{
+  color: #d43c33;
+}

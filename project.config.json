@@ -90,6 +90,12 @@
 					"pathName": "pages/comment/comment",
 					"query": "blogId=595282015f5e065900229d7f58c92765",
 					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "profile",
+					"pathName": "pages/profile/profile",
+					"scene": null
 				}
 			]
 		}

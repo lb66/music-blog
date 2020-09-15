@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "m-card":"/components/card/card"
+  },
+  "navigationBarTitleText": "我的发表"
+}
