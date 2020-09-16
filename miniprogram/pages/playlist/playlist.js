@@ -6,13 +6,13 @@ Page({
    */
   data: {
     swiperImgUrls: [{
-        url: 'http://p1.music.126.net/svkymWv-Na0zmyDpEjR-tQ==/109951165316695565.jpg?imageView&quality=89',
+        url: 'https://p1.music.126.net/svkymWv-Na0zmyDpEjR-tQ==/109951165316695565.jpg?imageView&quality=89',
       },
       {
-        url: 'http://p1.music.126.net/AGor5D2TIL1bk7jsgrvQwg==/109951165316818608.jpg?imageView&quality=89',
+        url: 'https://p1.music.126.net/AGor5D2TIL1bk7jsgrvQwg==/109951165316818608.jpg?imageView&quality=89',
       },
       {
-        url: 'http://p1.music.126.net/UGb_NsRTgNS3zVe8zl43Ww==/109951165316790713.jpg?imageView&quality=89',
+        url: 'https://p1.music.126.net/UGb_NsRTgNS3zVe8zl43Ww==/109951165316790713.jpg?imageView&quality=89',
       }
     ],
     playlist: []
